@@ -6,13 +6,13 @@ ELSE()
   SET( CMAKE_BUILD_TYPE Release CACHE STRING "Set to either \"Release\" or \"Debug\"" )
 ENDIF()
 
-PROJECT( QCSXCAD CXX)
+PROJECT(QCSXCAD LANGUAGES C CXX)
 
 cmake_minimum_required(VERSION 2.8)
 
 # https://cmake.org/cmake/help/v3.0/policy/CMP0020.html
 if(POLICY CMP0020)
-  cmake_policy(SET CMP0020 OLD)
+   cmake_policy(SET CMP0020 NEW)
 endif()
 
 IF(EXISTS ${PROJECT_SOURCE_DIR}/localConfig.cmake)
@@ -97,7 +97,7 @@ INCLUDE_DIRECTORIES( ${TinyXML_INCLUDE_DIR} )
 
 # vtk 9.1 needs MPI find to fail?????
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-  find_package(MPI)
+   find_package(MPI COMPONENTS C CXX REQUIRED)
 endif()
 
 # vtk
